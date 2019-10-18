@@ -1,0 +1,63 @@
+1
+					//D6-T_COMP.WAV 39.00,6.00 minPlay/fade 2.6 maxFade 2.4
+					//I1.WAV 2.52,0.71 minPlay/fade 3.0 maxFade 2.4
+					//J3.WAV 19.66,9.01 minPlay/fade 2.0 maxFade1.9
+					//L6A-T.WAV 18.30,3.70 minPlay/fade 1.7 maxFade 1.0
+					//S_COMP.WAV 10.86,6.82 minPlay/fade 3.7, maxFade 2.7
+					//V_COMP.WAV 34.37,11.90 minPlay/fade 4.6 maxFade 4.2
+2
+					//B_COMP.WAV 41.10,10.90 minPlay/fade 3.0 maxFade 2.6
+					//DR_INTERLUDE.WAV 34.58,19.40 minPlay/fade 3.2 maxFade 2.0
+					//E1.WAV 27.01,8.06 minPlay/fade 3.0 maxFade 2.0
+					//L4B-T.WAV 14.75,1.50 minPlay/fade 2.7 maxFade 2.2
+					//S3-T.WAV 12.21,6.61 minPlay/fade 2.0 maxFade 1.2
+3
+					//E2.WAV 27.36,10.47 minPlay/fade 2.5 maxFade 2.3
+					//G_COMP.WAV 41.00,18.80 minPlay/fade 4.0 maxFade 3.1
+					//H3-T-ST.WAV 5.32,4.89 minPlay/fade 2.0 maxFade 1.7
+					//L_COMP.WAV 17.10,2.27 minPlay/fade 4.0 maxFade 3.2
+					//S4-T.WAV 10.08,6.78 minPlay/fade 2.0 maxFade 1.2
+4
+					//D_COMP.WAV 32.56,5.83 minPlay/fade 4.0 maxFade 2.9
+					//H1.WAV 5.72,6.89 minPlay/fade 2.7 maxFade 2.0
+					//J_COMP.WAV 16.11,8.50 minPlay/fade 2.3 maxFade 2.1
+					//R_COMP-1.WAV 30.08,19.73 minPlay/fade 3.0 maxFade 2.7
+					//V4-T-HI.WAV 33.40,13.15 minPlay/fade 2.0 maxFade 1.7
+5
+					//D3+4-T_COMP.WAV 31.50,6.55 minPlay/fade 2.2 maxFade 1.7
+					//L5C-T.WAV 17.00,1.50 minPlay/fade 2.1 maxFade 1.7
+					//R_COMP-2.WAV 28.51,16.18 minPlay/fade 3.2 maxFade 2.7
+					//T_COMP1.WAV 7.81,1.50 minPlay/fade 3.0 maxFade 2.0
+					//V5-T-LOW.WAV 35.50,11.05 minPlay/fade 2.0 maxFade 1.7
+6
+	BRIDGE_COMP.WAV minPlay/fade maxFade
+					//D5-T.WAV 34.95,6.15 minPlay/fade 2.2 maxFade 1.7
+					//H2.WAV 3.51,4.63 minPlay/fade 2.2 maxFade 2.0
+					//R4+5-T.WAV 31.41,19.81 minPlay/fade 2.0 maxFade 1.7
+					//T_COMP2.WAV 12.65,1.50 minPlay/fade 3.0 maxFade 2.0
+
+
+
+	dark brú dyr 20.46,6.06
+	light brú dyr 26.44,6.11
+
+	ef nálægt (1m) brú og engar sendingar frá dwm1001
+		feida allt út
+		feida inn brú
+		bridgeMode = TRUE
+	ef bridgeMode == TRUE && sendingar koma inn
+		feida út brú
+		feida allt inn
+		bridgeMode = FALSE
+passa að feidi ekki fram og til baka á brúnni
+bara feida 1x
+
+
+	teensy x 6 og audio boards og allt í dóti á lanyard
+	snúra úr teensy í dwm1001 fylgir heyrnatólasnúrunni
+
+
+	græja magnara/mixer fyrir 6 teensy
+
+	búa til box fyrir teensya með magnara, eitthvað output fyrir dwm1001
+	búa til unit fyrir dwm1001 ofan a heyrnatolin
