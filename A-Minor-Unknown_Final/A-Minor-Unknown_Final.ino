@@ -160,17 +160,6 @@ void setup() {
   Serial4.begin(115200); // to send data to next teensies
   Serial5.begin(115200); // to send data to next teensies
 
-  //  Serial1.write(0x0D); //send the first "Enter"
-  //  delay(20);
-  //  Serial1.write(0x0D); //send the second "Enter" to get into Shell Mode
-  //  String c = Serial1.readString(); //read the response from dwm1001
-  //  Serial1.write(0x6C); //send "l"
-  //  Serial1.write(0x65); //send "e"
-  //  //Serial1.write(0x63); //send "c"
-  //  Serial1.write(0x70); //send "p"
-  //  Serial1.write(0x0D); //send "Enter"
-
-
   // Audio connections require memory to work.  For more
   // detailed information, see the MemoryAndCpuUsage example
   AudioMemory(8);
@@ -178,13 +167,13 @@ void setup() {
   // Comment these out if not using the audio adaptor board.
   // This may wait forever if the SDA & SCL pins lack
   // pullup resistors
-  sgtl5000_1.enable();
+  sgtl5000_1.enable(); // enable audio chip on the audio board
   sgtl5000_1.volume(0.9);
 
   SPI.setMOSI(SDCARD_MOSI_PIN);
   SPI.setSCK(SDCARD_SCK_PIN);
   if (!(SD.begin(SDCARD_CS_PIN))) {
-    // stop here, but print a message repetitively
+    // stop here if the sd card won't load, but print a message repetitively
     while (1) {
       Serial.println("Unable to access the SD card");
       delay(500);
@@ -196,7 +185,9 @@ void setup() {
 void loop() {
   //   put your main code here, to run repeatedly:
   //char posString[] = "POS,130.85,200.05,420.45,950"; // example of message received from DWM_1001
+
   currentMillis = millis(); // set currentMillis to the time at beginning of loop
+
   if ((!(Serial1.available() > 0)) && currentMillis - previousMillis > lepTimer) {
     previousMillis = currentMillis; // reset timer as soon as Serial is received
     Serial.print("currentMillis = ");
@@ -248,63 +239,22 @@ void loop() {
       sendPos();
     }
 
-    //    Serial.print("Tag pos x is: ");
-    //    Serial.println(tagPosX);
-    //    Serial.print("Tag pos Y is: ");
-    //    Serial.println(tagPosY);
-    //    Serial.print("Tag pos Z is: ");
-    //    Serial.println(tagPosZ);
-    //    Serial.print("Tag pos accuracy is: ");
-    //    Serial.print(tagPosAcc);
-    //    Serial.println("%");
-
   }
 
   for (int i = 0; i < loopCount; i++) {
     loopPosDiff[i] = positionDifference(tagPosX, tagPosY, loopPosX[i], loopPosY[i]); // loopPosDiff[i] = the linear distance between the tag and current loop
-    /*Serial.print("Difference between tag ");
-      Serial.print(i);
-      Serial.print(" and loop ");
-      Serial.print(i);
-      Serial.print(" is: ");
-      Serial.println(loopPosDiff[i]);*/
-
-    if ((loopPosDiff[i] < playDist[i]) && (!playSdWav1.isPlaying())) { // if distance to loop for i in array loopPosDiff is less
-      //      Serial.print("LoopPosDiff(");
-      //      Serial.print(i);
-      //      Serial.print(") = ");
-      //      Serial.println(loopPosDiff[i]);
+    if ((loopPosDiff[i] < playDist[i]) && (!playSdWav1.isPlaying())) { // if distance to loop for i in array loopPosDiff is less than playDist for i
       playFile(loopNames[i]);
-      //while(!playSdWav1.isPlaying());
-
-      //playSdWav1.play("E1.WAV");   // than playDist play file at i in array loopNames
-      //      Serial.print("LoopPosDiff(");
-      //      Serial.print(i);
-      //      Serial.print(") = ");
-      //      Serial.println(loopPosDiff[i]);
       nowPlaying = i;
-      //      Serial.print("Now playing: ");
-      //      Serial.println(loopNames[nowPlaying]);
     }
   }
+
   // set loopVolume to a map of the nowplaying position difference, the fade values and the volume levels possible
-  loopVolume = mapf(loopPosDiff[nowPlaying], distMinVol[nowPlaying], (distMinVol[nowPlaying] - fadeDist[nowPlaying]), minVol, maxVol); // loopVolume is a point between 1 and 0 depending on how big loopPosDiff is
-  constrainedLoopVolume = constrain(loopVolume, minVol, maxVol);
-  //  Serial.print("constrainedLoopVolume: ");
-  //  Serial.println(constrainedLoopVolume);
-  sgtl5000_1.volume(constrainedLoopVolume);
+  loopVolume = mapf(loopPosDiff[nowPlaying], distMinVol[nowPlaying], (distMinVol[nowPlaying] - fadeDist[nowPlaying]), minVol, maxVol); // loopVolume is a point between minVol and maxVol depending on how big loopPosDiff is
+  constrainedLoopVolume = constrain(loopVolume, minVol, maxVol); // map function can output higher or lower numbers, make sure they fit in minVol - maxVol range
+  sgtl5000_1.volume(constrainedLoopVolume); // set output volume to the constrainedLoopVolume
 
-
-  //                    Serial.print("loopPosDiff[nowPlaying] is: ");
-  //                    Serial.println(loopPosDiff[nowPlaying]);
-  //                    Serial.print("distMinVol[nowPlaying] is: ");
-  //                    Serial.println(distMinVol[nowPlaying]);
-  //                    Serial.print("distMaxVol[nowPlaying] is: ");
-  //                    Serial.println(distMaxVol[nowPlaying]);
-  //                    Serial.print("Sgtl5000_1 volume is: ");
-  //                    Serial.println(constrainedLoopVolume);
-
-  if ((loopPosDiff[nowPlaying] > playDist[nowPlaying])) {
+  if ((loopPosDiff[nowPlaying] > playDist[nowPlaying])) { // if loop is out of range stop playing it
     playSdWav1.stop();
     Serial.println("Stopped");
     nowPlaying = 8;
@@ -330,6 +280,9 @@ float positionDifference(float tagX, float tagY, float loopX, float loopY) {
 
 void sendLep() {
   // function that sends lep to DWM1001 to start receiving data
+  // to communicate with the DWM1001 chip you have to send
+  // enter twice to open communication, then send lep to start 
+  // receiving the position data when available, max 10hz
 
   Serial1.write(0x0D); //send the first "Enter"
   delay(20);
