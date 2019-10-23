@@ -22,7 +22,9 @@ float tagPosY = 100;; // float for tag y position
 float tagPosZ; // float for tag z position
 float tagPosAcc; // float for accuracy percentage
 
-#define TEENSY1
+#define TEENSY1 // set to #define TEENSY1, TEENSY2 all the way to 6, the loop
+                // positions, names, play and fade distances as well as min/max
+                // volumes are set for the selected Teensy
 
 #ifdef TEENSY1
  //teensy folder 1
