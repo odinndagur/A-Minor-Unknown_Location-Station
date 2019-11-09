@@ -22,7 +22,7 @@ float tagPosY = 100;; // float for tag y position
 float tagPosZ; // float for tag z position
 float tagPosAcc; // float for accuracy percentage
 
-#define TEENSY1 // set to #define TEENSY1, TEENSY2 all the way to 6, the loop
+#define TEENSY6 // set to #define TEENSY1, TEENSY2 all the way to 6, the loop
                 // positions, names, play and fade distances as well as min/max
                 // volumes are set for the selected Teensy
 
@@ -34,14 +34,14 @@ float tagPosAcc; // float for accuracy percentage
          float loopPosX[loopCount] = {39.00, 2.52, 19.66, 18.30, 10.86, 34.37}; // float array for x position of music loops
          float loopPosY[loopCount] = {6.00, 0.71, 9.01, 3.70, 6.82, 11.90}; // float array for y position of music loops
 
-         float playDist[loopCount] = {2.6, 3.0, 2.0, 1.7, 3.7, 4.6}; // float for distance to start playing loop at
+         float playDist[loopCount] = {4.0, 4.0, 3.4, 2.2, 4.7, 6.2}; // float for distance to start playing loop at
          float distMinVol[loopCount] = {2.6, 3.0, 2.0, 1.7, 3.7, 4.6}; // float for distance for fade to start (maximum distance, minimum volume)
          float distMaxVol[loopCount] = {2.4, 2.4, 1.9, 1.0, 2.7, 4.2}; // float for distance for max volume (maximum volume, minimum distance)
 
-         float fadeDist[loopCount] = {0.4, 0.6, 0.4, 0.7, 1.0, 0.4}; // float for distance to fade from min to max vol
+         float fadeDist[loopCount] = {1.0, 0.8, 2.0, 0.8, 1.2, 1.5}; // float for distance to fade from min to max vol
 
-         float minVol = 0;
-         float maxVol = 0.7;
+         float minVol = 0.2;
+         float maxVol = 0.6;
 #endif
 
 #ifdef TEENSY2
@@ -53,14 +53,14 @@ float tagPosAcc; // float for accuracy percentage
          float loopPosX[loopCount] = {41.10, 34.58, 27.01, 14.75, 12.21}; // float array for x position of music loops
          float loopPosY[loopCount] = {10.90, 19.40, 8.06, 1.50, 6.61}; // float array for y position of music loops
          //
-         float playDist[loopCount] = {3.0, 3.2, 3.0, 2.7, 2.0}; // float for distance to start playing loop at
+         float playDist[loopCount] = {4.4, 5.0, 4.4, 3.0, 2.6}; // float for distance to start playing loop at
          float distMinVol[loopCount] = {3.0, 3.2, 3.0, 2.7, 2.0}; // float for distance for fade to start (maximum distance, minimum volume)
          float distMaxVol[loopCount] = {2.6, 2.0, 2.0, 2.2, 1.2}; // float for distance for max volume (maximum volume, minimum distance)
 
-         float fadeDist[loopCount] = {0.4, 1.2, 1.0, 0.5, 0.8}; // float for distance to fade from min to max vol
+         float fadeDist[loopCount] = {0.6, 1.8, 1.2, 0.7, 0.9}; // float for distance to fade from min to max vol
 
-         float minVol = 0;
-         float maxVol = 0.85;
+         float minVol = 0.2;
+         float maxVol = 0.5;
 #endif
 
 #ifdef TEENSY3
@@ -72,14 +72,14 @@ float tagPosAcc; // float for accuracy percentage
             float loopPosX[loopCount] = {27.36, 41.00, 5.32, 17.10, 10.08}; // float array for x position of music loops
             float loopPosY[loopCount] = {10.47, 18.80, 4.89, 2.27, 6.78}; // float array for y position of music loops
             //
-            float playDist[loopCount] = {2.5, 4.0, 2.0, 4.0, 2.0}; // float for distance to start playing loop at
+            float playDist[loopCount] = {3.5, 5.8, 2.6, 5.5, 2.8}; // float for distance to start playing loop at
             float distMinVol[loopCount] = {2.5, 4.0, 2.0, 4.0, 2.0}; // float for distance for fade to start (maximum distance, minimum volume)
             float distMaxVol[loopCount] = {2.3, 3.1, 1.7, 3.2, 1.2}; // float for distance for max volume (maximum volume, minimum distance)
 
-            float fadeDist[loopCount] = {0.4, 0.9, 0.4, 0.8, 0.8}; // float for distance to fade from min to max vol
+            float fadeDist[loopCount] = {0.6, 1.5, 0.6, 0.6, 1.0}; // float for distance to fade from min to max vol
 
-            float minVol = 0;
-            float maxVol = 0.85;
+            float minVol = 0.2;
+            float maxVol = 0.5;
 #endif
 
 #ifdef TEENSY4
@@ -91,14 +91,14 @@ float tagPosAcc; // float for accuracy percentage
          float loopPosX[loopCount] = {32.56, 5.72, 16.11, 30.08, 33.40}; // float array for x position of music loops
          float loopPosY[loopCount] = {5.83, 6.89, 8.5, 19.73, 13.15}; // float array for y position of music loops
          //
-         float playDist[loopCount] = {4.0, 2.7, 2.3, 3.0, 2.0}; // float for distance to start playing loop at
+         float playDist[loopCount] = {5.0, 3.7, 3.3, 4.0, 3.0}; // float for distance to start playing loop at
          float distMinVol[loopCount] = {4.0, 2.7, 2.3, 3.0, 2.0}; // float for distance for fade to start (maximum distance, minimum volume)
          float distMaxVol[loopCount] = {2.9, 2.0, 2.1, 2.7, 1.7}; // float for distance for max volume (maximum volume, minimum distance)
 
-         float fadeDist[loopCount] = {1.1, 0.7, 0.4, 0.4, 0.4}; // float for distance to fade from min to max vol
+         float fadeDist[loopCount] = {1.3, 2.7, 0.6, 0.6, 0.6}; // float for distance to fade from min to max vol
 
-         float minVol = 0;
-         float maxVol = 0.85;
+         float minVol = 0.2;
+         float maxVol = 0.5;
 #endif
 
 #ifdef TEENSY5
@@ -110,14 +110,14 @@ float tagPosAcc; // float for accuracy percentage
          float loopPosX[loopCount] = {31.50, 17.00, 28.51, 7.81, 35.50}; // float array for x position of music loops
          float loopPosY[loopCount] = {6.55, 1.50, 16.18, 1.50, 11.05}; // float array for y position of music loops
          //
-         float playDist[loopCount] = {2.2, 2.1, 3.2, 3.7, 2.0}; // float for distance to start playing loop at
+         float playDist[loopCount] = {2.7, 2.1, 4.2, 4.7, 3.0}; // float for distance to start playing loop at
          float distMinVol[loopCount] = {2.2, 2.1, 3.2, 3.7, 2.0}; // float for distance for fade to start (maximum distance, minimum volume)
          float distMaxVol[loopCount] = {1.7, 1.7, 2.7, 2.2, 1.7}; // float for distance for max volume (maximum volume, minimum distance)
 
-         float fadeDist[loopCount] = {0.5, 0.4, 0.5, 1.5, 0.4}; // float for distance to fade from min to max vol
+         float fadeDist[loopCount] = {0.7, 0.4, 0.7, 2.4, 0.6}; // float for distance to fade from min to max vol
 
-         float minVol = 0;
-         float maxVol = 0.85;
+         float minVol = 0.2;
+         float maxVol = 0.5;
 #endif
 
 #ifdef TEENSY6
@@ -129,14 +129,14 @@ float tagPosAcc; // float for accuracy percentage
           float loopPosX[loopCount] = {0.00, 34.95, 3.51, 31.41, 12.65}; // float array for x position of music loops
           float loopPosY[loopCount] = {0.00, 6.15, 4.63, 19.81, 1.50}; // float array for y position of music loops
           
-          float playDist[loopCount] = {0.0, 2.2, 2.2, 2.0, 3.0}; // float for distance to start playing loop at
+          float playDist[loopCount] = {0.0, 2.7, 3.2, 2.5, 4.0}; // float for distance to start playing loop at
           float distMinVol[loopCount] = {0.0, 2.2, 2.2, 2.0, 3.0}; // float for distance for fade to start (maximum distance, minimum volume)
           float distMaxVol[loopCount] = {0.0, 1.7, 2.0, 1.7, 2.0}; // float for distance for max volume (maximum volume, minimum distance)
           
-          float fadeDist[loopCount] = {0.0, 0.5, 0.4, 0.4, 1.0}; // float for distance to fade from min to max vol
+          float fadeDist[loopCount] = {0.0, 0.7, 1.0, 0.6, 1.2}; // float for distance to fade from min to max vol
           
-          float minVol = 0;
-          float maxVol = 0.85;
+          float minVol = 0.2;
+          float maxVol = 0.5;
 #endif
 
 
@@ -170,7 +170,7 @@ void setup() {
   // This may wait forever if the SDA & SCL pins lack
   // pullup resistors
   sgtl5000_1.enable(); // enable audio chip on the audio board
-  sgtl5000_1.volume(0.9);
+  sgtl5000_1.volume(maxVol);
 
   SPI.setMOSI(SDCARD_MOSI_PIN);
   SPI.setSCK(SDCARD_SCK_PIN);
